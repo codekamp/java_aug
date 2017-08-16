@@ -6,6 +6,6 @@ package codekamp;
 public class Animal {
 
     public void walk() {
-        System.out.println("Tak Tak Tak Tak");
+        System.out.println("move move");
     }
 }

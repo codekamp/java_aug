@@ -5,7 +5,20 @@ package codekamp;
  */
 public class Cat extends Animal {
 
+    private int pqr;
+
     public void climbTree() {
+        char x;
         System.out.println("Climbing the tree");
+    }
+
+    public void run() {
+        int x;
+    }
+
+    public String jump() {
+        float x;
+
+        return "hello";
     }
 }
