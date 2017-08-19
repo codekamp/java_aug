@@ -5,28 +5,12 @@ package codekamp;
  */
 public class Dog extends Animal {
 
-    public void bark() {
-        System.out.println("Wuff Wuff");
+    public void stop() {
+        System.out.println("Dog vala stop");
     }
 
-    public void bark(String a, int b) {
-        System.out.println("Wuff " + a);
+    public void moveLeft() {
+        System.out.println("Dog moving left");
+        super.stop();
     }
-
-    //method overloading
-    public void bark(int x, String y) {
-        System.out.println("Wuff " + y);
-    }
-
-
-    // this is method overriding
-
-    public void walk() {
-        System.out.println("fire fire");
-    }
-
-
-
-
-
 }

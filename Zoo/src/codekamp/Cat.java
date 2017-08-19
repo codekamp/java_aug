@@ -21,4 +21,8 @@ public class Cat extends Animal {
 
         return "hello";
     }
+
+    public void walk() {
+        System.out.println("Cat Cat");
+    }
 }
