@@ -49,6 +49,9 @@ public class Demo implements Xyz {
         frame.setVisible(true);
 
         Xyz myVar = new Demo();
+
+
+        Xyz v1 = new Xyz();
     }
 
     private void signin(String username, String password) {

@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 public class Cat implements ActionListener {
 
     public void actionPerformed(ActionEvent xyz) {
+
         System.out.println("simply cancel the popup");
     }
 }

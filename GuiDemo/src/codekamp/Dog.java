@@ -6,10 +6,8 @@ import java.awt.event.ActionListener;
 /**
  * Created by cerebro on 23/08/17.
  */
-public class Dog implements ActionListener, Xyz {
-    public void actionPerformed(ActionEvent xyz) {
-        System.out.println("get username and password and send it to server");
-    }
+public class Dog implements Xyz {
+
 
     @Override
     public String pqr(int a) {
