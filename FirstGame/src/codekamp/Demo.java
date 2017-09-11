@@ -2,6 +2,8 @@ package codekamp;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -15,6 +17,7 @@ public class Demo implements KeyListener {
     private static int playerYCord = 315;
     private static int playerYVel = 0;
     private static int playerYAcc = 0;
+    private static AudioClip jumpAudio;
 
 
     public static void main(String[] args) {
@@ -38,22 +41,23 @@ public class Demo implements KeyListener {
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.exit(0);
         }
 
         panel.requestFocus();
 
         Color skyColor = new Color(22, 237, 255);
 
-//        images/grass.png
-        Image grassImage = null;
-        Image p1 = null;
-        Image p2 = null;
-        Image p3 = null;
-        Image p4 = null;
-        Image p5 = null;
-        Image playerJump = null;
-        Image playerImage = null;
+
+        Image grassImage;
+        Image p1;
+        Image p2;
+        Image p3;
+        Image p4;
+        Image p5;
+        Image playerJump;
+        Image playerImage;
+        Demo.jumpAudio = Applet.newAudioClip(Demo.class.getResource("images/onjump.wav"));
 
         try {
             grassImage = ImageIO.read(Demo.class.getResource("images/grass.png"));
@@ -63,8 +67,13 @@ public class Demo implements KeyListener {
             p4 = ImageIO.read(Demo.class.getResource("images/run_anim4.png"));
             p5 = ImageIO.read(Demo.class.getResource("images/run_anim5.png"));
             playerJump = ImageIO.read(Demo.class.getResource("images/jump.png"));
-        } catch (IOException e) {
-
+        } catch (Exception e) {
+            Graphics g = panel.getGraphics();
+            g.setColor(Color.red);
+            g.setFont(new Font("Arial", Font.BOLD, 30));
+            g.drawString("Seems game is corrput", 100, 100);
+            g.dispose();
+            return;
         }
 
         // 1 2 3 4 5 4 3 2       1 2 3 4 5 4 3 2
@@ -124,11 +133,11 @@ public class Demo implements KeyListener {
         if(e.getKeyCode() == KeyEvent.VK_SPACE && Demo.playerYCord == 315) {
             Demo.playerYVel = -16;
             Demo.playerYAcc = 1;
+            Demo.jumpAudio.play();
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        // Do nothing
     }
 }

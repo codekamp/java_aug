@@ -18,11 +18,30 @@ public class Demo {
     //  why it failed
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws OutOfBalanceException {
 
 //        Demo.transferMoney();
 
-        Demo.promotion();
+
+        Demo.accountStatement();
+
+
+        try {
+            Demo.transferMoney();
+        } catch (UnableToSendOTPException e) {
+
+        }
+
+
+        try {
+            Demo.divide(0, 99);
+        } catch (DivisionByZeroException e) {
+            e.getMessage();
+        }
+
+
+        Demo.doSomething();
+
 
     }
 
@@ -31,41 +50,45 @@ public class Demo {
         //code to shortlist target customers
 
         try {
+            System.out.println("try starts");
             Demo.sendSms("+919999000011", "You have been preapproved for home loan of ...");
+            Demo.divide(10, 30);
+            System.out.println("try ends");
+
         } catch (NumberInvalidException e) {
             System.out.println("Remove from list");
         } catch (OutOfBalanceException e) {
 
+        } catch (DivisionByZeroException e) {
+
+        } finally {
+
         }
 
         System.out.println("Hello world!");
-
-        Demo.sendSms("dfdsf","SDFdsf");
 
 //        if (output == "Number is invalid") {
 //            System.out.println("Remove from list");
 //        }
     }
 
-    public static void accountStatement() {
+    public static void accountStatement() throws OutOfBalanceException {
+
         try {
             Demo.sendSms("+919999000011", "Rs. 9900 credited to your account");
-        } catch (Exception e) {
-            System.out.println("send email");
+        } catch (NumberInvalidException e) {
+            // some backup plan
         }
 
-//        if (output != null) {
-//            System.out.println("send email");
-//        }
     }
 
-    public static void transferMoney() {
+    public static void transferMoney() throws UnableToSendOTPException {
         try {
             Demo.sendSms("+919999000011", "221100 is your OTP for ...");
         } catch (OutOfBalanceException e) {
-            System.out.println("Show IVRS option");
+            throw new UnableToSendOTPException("GSM module out of balance");
         } catch (NumberInvalidException e) {
-            System.out.println("You need to attach a vaild mobile number before you can use net banking");
+            throw new UnableToSendOTPException("User's mobile number not valid");
         }
 
 //        if (output == null) {
@@ -82,16 +105,26 @@ public class Demo {
             throw new NumberInvalidException();
         }
 
+        if(!HAS_BALANCE) {
+            throw new OutOfBalanceException();
+        }
+
         System.out.println("sending sms to " + number);
     }
 
     public static int divide(int divior, int divident) throws DivisionByZeroException {
 
         if (divior == 0) {
-            throw new DivisionByZeroException();
+            throw new DivisionByZeroException("Mathmatics doesn't allow it");
         }
 
         return divident / divior;
 
+    }
+
+    public static void doSomething() {
+        System.out.println("I will throw a runtime exception");
+
+        throw new RuntimeException();
     }
 }
