@@ -65,6 +65,7 @@ public class GamePanel extends JPanel implements KeyListener, Runnable {
             GamePanel.currentScreen.update();
 
             Graphics g = this.getGraphics();
+            g.clearRect(0, 0, 800, 450);
             GamePanel.currentScreen.render(g);
             g.dispose();
         }

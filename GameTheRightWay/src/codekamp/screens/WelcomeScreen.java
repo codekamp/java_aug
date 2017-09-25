@@ -13,7 +13,12 @@ public class WelcomeScreen extends Screen {
 
     @Override
      public void render(Graphics g) {
-        g.drawImage(Resources.grassImage, 0, 405, null);
+       //draw non entities
+        g.drawImage(Resources.welcomeImage, 0, 0, null);
+
+
+        //draw entities
+        super.render(g);
     }
 
     @Override
