@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 
 
 /**
@@ -17,9 +18,12 @@ public class GamePanel extends JPanel implements KeyListener, Runnable {
 
     public static Screen currentScreen;
 
+    public static final int GAME_WIDTH = 800;
+    public static final int GAME_HEIGHT = 450;
+
 
     public GamePanel() {
-        this.setPreferredSize(new Dimension(800, 450));
+        this.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
         this.setFocusable(true);
         this.addKeyListener(this);
     }
@@ -32,7 +36,6 @@ public class GamePanel extends JPanel implements KeyListener, Runnable {
         GamePanel.currentScreen = new WelcomeScreen();
 
         Thread t = new Thread(this);
-        t.setName("my awesome thread");
         t.start();
 
     }
@@ -54,6 +57,8 @@ public class GamePanel extends JPanel implements KeyListener, Runnable {
 
     @Override
     public void run() {
+        BufferedImage bigImg = new BufferedImage(GAME_WIDTH, GAME_HEIGHT, BufferedImage.TYPE_INT_RGB);
+
         while (true) {
             try {
                 Thread.sleep(30);
@@ -64,10 +69,17 @@ public class GamePanel extends JPanel implements KeyListener, Runnable {
 
             GamePanel.currentScreen.update();
 
-            Graphics g = this.getGraphics();
-            g.clearRect(0, 0, 800, 450);
-            GamePanel.currentScreen.render(g);
-            g.dispose();
+            Graphics panelGraphics = this.getGraphics();
+            Graphics imageGraphics = bigImg.getGraphics();
+
+
+
+            GamePanel.currentScreen.render(imageGraphics);
+            panelGraphics.drawImage(bigImg, 0, 0, null);
+
+
+            imageGraphics.dispose();
+            panelGraphics.dispose();
         }
     }
 }

@@ -14,6 +14,8 @@ public class Player extends Entity {
 
         this.x = x;
         this.y = y;
+        this.height = 90;
+        this.width = 72;
     }
 
     @Override

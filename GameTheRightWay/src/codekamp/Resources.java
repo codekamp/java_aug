@@ -1,6 +1,8 @@
 package codekamp;
 
 import javax.imageio.ImageIO;
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ public class Resources {
     public static Image welcomeImage;
     public static java.util.List<Image> playerImages = new ArrayList<>();
     public static Color skyColor = new Color(208, 244, 247);
+    public static AudioClip hitAudio;
 
 
     public static void load() {
@@ -33,6 +36,7 @@ public class Resources {
             Resources.playerImages.add(Resources.playerImages.get(3));
             Resources.playerImages.add(Resources.playerImages.get(2));
             Resources.playerImages.add(Resources.playerImages.get(1));
+            Resources.hitAudio = Applet.newAudioClip(Resources.class.getResource("images/onjump.wav"));
         } catch (IOException e) {
             e.printStackTrace();
         }

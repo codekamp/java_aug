@@ -13,6 +13,8 @@ public class Block extends Entity {
         this.x = x;
         this.y = y;
         this.xVel = -5;
+        this.height = 50;
+        this.width = 20;
         this.image = Resources.blockImage;
     }
 }

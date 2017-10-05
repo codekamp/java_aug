@@ -20,7 +20,9 @@ abstract public class Screen {
 
     public void render(Graphics g) {
         for (Entity e : entities) {
-            g.drawImage(e.image, e.x, e.y, null);
+            if(e.visible) {
+                g.drawImage(e.image, e.x, e.y, null);
+            }
         }
     }
 
